@@ -1,0 +1,9 @@
+{% include 'header.html' %}
+<h1>Django-Twitter</h1>
+<h2>Welcome {{ logged_in_user }}</h2>
+
+<h3>Your Tweets:</h3>
+
+{% for tweet in tweets %}
+    {% include 'tweet_partial.html' %}
+{% endfor %}

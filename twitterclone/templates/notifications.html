@@ -1,0 +1,7 @@
+{% include 'header.html' %}
+
+<h1>Check Out Your Notifications</h1>
+
+{% for notification in notifications %}
+    <p>{{ notification }}</p>
+{% endfor %}
