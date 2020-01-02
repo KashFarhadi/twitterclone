@@ -1,0 +1,8 @@
+{% include 'header.html' %}
+
+<form action='' method='post'>
+    {% csrf_token %}
+    <p>Talk to Me {{ form.body }}
+        <input type='submit' value='Tweet'>
+    </p>
+</form>
