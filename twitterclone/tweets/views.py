@@ -10,6 +10,8 @@ from .helper import make_notifications
 def add_tweet_view(request):
     html = 'addtweet.html'
     form = None
+    logged_in_user = TwitterUser.objects.filter(user=request.user).first()
+
     if request.method == 'POST':
         form = TweetForm(request.POST)
         if form.is_valid():
@@ -20,10 +22,10 @@ def add_tweet_view(request):
                 author=author
             )
             make_notifications(tweet)
-            return render(request, 'tweetsuccess.html')
+            return render(request, 'tweetsuccess.html', { 'logged_in_user':logged_in_user} )
     else:
         form = TweetForm()
-    return render(request,html, {'form':form})
+    return render(request,html, {'form':form, 'logged_in_user':logged_in_user})
 
 def tweet_view(request, tweet_id):
     tweet = Tweet.objects.filter(id=tweet_id).first

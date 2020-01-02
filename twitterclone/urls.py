@@ -21,7 +21,7 @@ urlpatterns = [
     path('signup/', signup_view),
     path('login/', login_view),
     path('logout/', logout_view),
-    path('notifications/<int:user_id>', notifications_view),
+    path('notifications/<int:user_id>/', notifications_view),
     path('addtweet/', add_tweet_view),
     path('tweet/<int:tweet_id>/', tweet_view),
     path('profile/<int:user_id>/', profile_view, name='profile'),

@@ -19,12 +19,12 @@ def index_view(request):
     return render(request, html, data)
 
 def profile_view(request, user_id):
-    user = TwitterUser.objects.filter(user=user_id).first()
-    tweets = Tweet.objects.filter(author=user)
+    logged_in_user = TwitterUser.objects.filter(user=user_id).first()
+    tweets = Tweet.objects.filter(author=logged_in_user)
     sorted_tweets = sorted(tweets, key=lambda tweet: tweet.created, reverse=True)
-    following = user.following.get_queryset()
+    following = logged_in_user.following.get_queryset()
     data = {
-        'user': user,
+        'logged_in_user': logged_in_user,
         'tweets': sorted_tweets,
         'qty_of_tweets': len(sorted_tweets),
         'follow_unfollow': 'follow',
@@ -35,7 +35,7 @@ def profile_view(request, user_id):
         qty_of_notifications = Notification.objects.filter(user_to_notify=logged_in_user).count()
         data['qty_of_notifications'] = qty_of_notifications
         data['logged_in_user'] = logged_in_user
-        if user in logged_in_user.following.get_queryset():
+        if logged_in_user in logged_in_user.following.get_queryset():
             data['follow_unfollow'] = 'unfollow'
     html = 'profile.html'
     return render(request, html, data)
