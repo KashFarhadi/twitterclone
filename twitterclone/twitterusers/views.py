@@ -4,6 +4,10 @@ from ..tweets.models import Tweet
 from ..authentication.models import TwitterUser
 from ..notifications.models import Notification
 
+from django.views import View
+from django.utils.decorators import method_decorator
+
+
 @login_required()
 def index_view(request):
     tweets = Tweet.objects.all()
@@ -40,14 +44,14 @@ def profile_view(request, user_id):
     html = 'profile.html'
     return render(request, html, data)
 
-@login_required
-def toggle_following_view(request, user_id):
-    user_to_follow = TwitterUser.objects.filter(user=user_id).first()
-    logged_in_user = TwitterUser.objects.filter(user=request.user).first()
-    if user_to_follow in logged_in_user.following.get_queryset():
-        logged_in_user.following.remove(user_to_follow),
-    else:
-        logged_in_user.following.add(user_to_follow)
-    logged_in_user.save()
-    html = 'profile.html'
-    return redirect('/profile/' + str(user_id))
+@method_decorator(login_required, name='dispatch')
+class ToggleFollowingView(View):
+    def get(self, request, user_name):
+        user_to_follow = TwitterUser.objects.filter(name=user_name).first()
+        logged_in_user = TwitterUser.objects.filter(user=request.user).first()
+        if user_to_follow in logged_in_user.following.get_queryset():
+            logged_in_user.following.remove(user_to_follow),
+        else:
+            logged_in_user.following.add(user_to_follow)
+        logged_in_user.save()
+        return redirect('/profile/' + str(user_name))
