@@ -8,7 +8,7 @@ from .helper import make_notifications
 
 @login_required()
 def add_tweet_view(request):
-    html = 'addtweet.html'
+    html = 'generic_form.html'
     form = None
     logged_in_user = TwitterUser.objects.filter(user=request.user).first()
 
@@ -25,7 +25,7 @@ def add_tweet_view(request):
             return render(request, 'tweetsuccess.html', { 'logged_in_user':logged_in_user} )
     else:
         form = TweetForm()
-    return render(request,html, {'form':form, 'logged_in_user':logged_in_user})
+    return render(request,html, {'form':form, 'logged_in_user':logged_in_user, 'message': 'Come make some Tweets'})
 
 def tweet_view(request, tweet_id):
     tweet = Tweet.objects.filter(id=tweet_id).first
