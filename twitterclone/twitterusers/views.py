@@ -54,4 +54,4 @@ class ToggleFollowingView(View):
         else:
             logged_in_user.following.add(user_to_follow)
         logged_in_user.save()
-        return redirect('/profile/' + str(user_name))
+        return redirect('/profile/' + str(logged_in_user.pk) + '/'))

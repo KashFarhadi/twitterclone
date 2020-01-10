@@ -4,7 +4,7 @@
 <h3>{{ user.name }}, You have made {{ qty_of_tweets }} tweets and are following {{ qty_following }} users</h3>
 <p> bio: {{ user.bio }}</p>
 
-<a href='/follow/{{user.user_id}}'><button>{{ follow_unfollow }}</button></a>
+<a href='/follow/{{user}}'><button>{{ follow_unfollow }}</button></a>
 
 {% for tweet in tweets %}
     <p>{{ tweet }}</p>
