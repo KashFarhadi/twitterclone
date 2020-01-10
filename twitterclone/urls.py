@@ -1,7 +1,6 @@
 from django.contrib import admin
 from django.urls import path
 
-
 from .authentication.views import SignUpView, LoginView, LogoutView
 from .authentication.models import TwitterUser
 from .twitterusers.views import index_view, profile_view, ToggleFollowingView

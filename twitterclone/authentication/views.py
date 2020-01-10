@@ -9,7 +9,7 @@ from .forms import SignupForm, LoginForm
 from django.views import View
 from django.views.generic.edit import FormView
 
-
+    
 class SignUpView(FormView):
     template_name = 'generic_form.html'
     form_class = SignupForm

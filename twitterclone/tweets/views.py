@@ -27,7 +27,10 @@ def add_tweet_view(request):
 
 def tweet_view(request, tweet_id):
     tweet = Tweet.objects.filter(id=tweet_id).first
-    logged_in_user = TwitterUser.objects.filter(user=request.user).first()
+    try:
+        logged_in_user = TwitterUser.objects.filter(user=request.user).first()
+    except TypeError:
+        	logged_in_user = None 
     qty_of_notifications = Notification.objects.filter(user_to_notify=logged_in_user).count()
     html = 'tweet.html'
     data = {
