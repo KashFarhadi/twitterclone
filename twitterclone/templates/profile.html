@@ -4,7 +4,7 @@
 <h3>{{ logged_in_user }}, You have made {{ qty_of_tweets }} tweets and are following {{ qty_following }} users</h3>
 <p> bio: {{ logged_in_user.bio }}</p>
 
-<a href='/follow/{{logged_in_user}}/'><button>{{ follow_unfollow }}</button></a>
+<a href='/follow/{{logged_in_user.pk}}/'><button>{{ follow_unfollow }}</button></a>
 <br>
 
 Here are your tweets:
